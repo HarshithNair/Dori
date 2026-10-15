@@ -1,6 +1,6 @@
 # dori. — Kaam se kamaai tak.
 
-A warm yellow-and-gold frontend-only worker livelihood demo built with Next.js App Router, TypeScript, Tailwind CSS, Motion, Radix/shadcn-style components, Recharts and QRCode React.
+A light blue frontend-only worker livelihood demo built with Next.js App Router, TypeScript, Tailwind CSS, Motion, Radix/shadcn-style components, Recharts and QRCode React.
 
 ## Run
 
@@ -36,6 +36,12 @@ The verify QR uses the current origin and `/verify/`. The UPI QR contains a clea
 ## Known demo scope
 
 Language selection translates the interface into Hindi or Marathi. Proper nouns, demo IDs and the `dori.` wordmark stay as they are. Voice controls show simulated transcriptions or summaries. Baseline job history and profiles are sample records. Worker portraits were provided as references. A single active project connects the judge's story; this is not a multi-job accounting system. Team shares are proposals and are not automatically paid or deducted.
+
+## Palette
+
+Colours are defined as CSS custom properties on `:root` in `app/globals.css`: `--blue` (primary accent), `--bright` (light blue highlight), `--sky` (pale tint), `--bg`, `--navy` (ink), `--muted`, `--line`, plus semantic `--green` and `--red`. A palette block near the end of the file overrides specific components, and a few SVG strokes are hardcoded in the components that draw them.
+
+Every text pairing meets WCAG AA or better; `--green` on the page background sits at 4.49:1, so it is used for badge-sized text only.
 
 ## Language
 
