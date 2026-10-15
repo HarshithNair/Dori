@@ -188,3 +188,10 @@ html{scroll-behavior:smooth}
 .aadhaar-card .aadhaar-state{margin:12px 0 16px}
 .aadhaar-card .btn{width:100%}
 .aadhaar-card .text-button{margin-top:14px}
+
+/* Profile editing. */
+.heading-actions{display:flex;gap:10px;flex-wrap:wrap}
+.modal .terms-grid{margin:0}
+.modal .availability.large{margin-top:18px}
+.modal .onboard-actions{margin-top:24px;display:flex;gap:12px;justify-content:flex-end}
+@media(max-width:760px){.heading-actions{width:100%}.heading-actions .btn{flex:1}}
