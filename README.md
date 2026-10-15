@@ -23,7 +23,7 @@ Open http://localhost:3000. `npm run build` produces a static export in `out/`.
 9. Record partial or full received payment. Pending money never contributes to Budget coverage.
 10. Check the worker dashboard, Budget, Invisible CV and Forecast for the updated information.
 
-All services are simulated. No real authentication, messaging, payments, forecasts or eligibility decisions. Data persists in this browser's localStorage. Role switching shares that same state; devices do not synchronise.
+All services are simulated. No real authentication, payments, forecasts or eligibility decisions. The one exception is noted under Messaging below. Data persists in this browser's localStorage. Role switching shares that same state; devices do not synchronise.
 
 ## Opening media
 
@@ -36,6 +36,14 @@ The verify QR uses the current origin and `/verify/`. The UPI QR contains a clea
 ## Known demo scope
 
 Language selection translates the interface into Hindi or Marathi. Proper nouns, demo IDs and the `dori.` wordmark stay as they are. Voice controls show simulated transcriptions or summaries. Baseline job history and profiles are sample records. Worker portraits were provided as references. A single active project connects the judge's story; this is not a multi-job accounting system. Team shares are proposals and are not automatically paid or deducted.
+
+## Messaging
+
+Tapping **I'm interested** on a job card opens the visitor's own SMS app with a message prefilled to the number in `lib/sms.ts`, via an `sms:` link. The site sends nothing itself and the visitor has to tap send, so there is no provider account, no credential and no cost involved.
+
+This is deliberate rather than a shortcut. The site is a static export with no server, so an SMS provider's API key would have to ship inside the JavaScript bundle, where any visitor could read and use it. A deep link avoids that entirely. Auto-sending without the visitor's involvement would need either a serverless endpoint holding the key, or a write-only webhook the browser can POST to.
+
+Two caveats: desktop browsers often have no `sms:` handler, so nothing happens there; and transactional SMS to Indian numbers normally requires DLT registration with TRAI, which does not apply here only because the visitor's own messaging app does the sending.
 
 ## Palette
 
