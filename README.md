@@ -39,11 +39,19 @@ Language selection translates the interface into Hindi or Marathi. Proper nouns,
 
 ## Messaging
 
-Tapping **I'm interested** on a job card opens the visitor's own SMS app with a message prefilled to the number in `lib/sms.ts`, via an `sms:` link. The site sends nothing itself and the visitor has to tap send, so there is no provider account, no credential and no cost involved.
+Tapping **I'm interested** on a job card sends a message about the job to the number in `lib/sms.ts`. There are two paths, chosen at build time.
 
-This is deliberate rather than a shortcut. The site is a static export with no server, so an SMS provider's API key would have to ship inside the JavaScript bundle, where any visitor could read and use it. A deep link avoids that entirely. Auto-sending without the visitor's involvement would need either a serverless endpoint holding the key, or a write-only webhook the browser can POST to.
+**With `NEXT_PUBLIC_SMS_WEBHOOK` set**, the browser POSTs `{to, text}` as JSON to that URL and the message is sent with no further action from the visitor. Copy `.env.example` to `.env.local` and paste a write-only endpoint: a Zapier *Webhooks by Zapier -> Catch Hook* trigger feeding an SMS action works, as does your own serverless function. A write-only hook is not a credential, which is why it can live in a static bundle; a provider API key cannot, because `NEXT_PUBLIC_` values are inlined at build time and readable by every visitor.
 
-Two caveats: desktop browsers often have no `sms:` handler, so nothing happens there; and transactional SMS to Indian numbers normally requires DLT registration with TRAI, which does not apply here only because the visitor's own messaging app does the sending.
+**With nothing configured**, the button falls back to opening the visitor's own SMS app with the text prefilled. Nothing is sent until they tap send, and desktop browsers generally have no `sms:` handler at all. A webhook that errors or times out after 8 seconds falls back to the same composer rather than losing the message.
+
+### Encoding
+
+Outgoing text passes through `smsSafe()`, which rewrites `Rs.` for `₹` and straightens typographic quotes and dashes. None of those characters exist in the GSM-7 alphabet, and a single one forces the whole message into UCS-2, where each segment holds 70 characters instead of 160. The English message is 114 characters and fits one GSM-7 segment; left unconverted it became a two-part Unicode message, which Indian carriers drop often enough to matter. Hindi and Marathi are Devanagari and are necessarily UCS-2.
+
+### Delivery to Indian numbers
+
+Transactional SMS to a `+91` number normally requires DLT registration with TRAI: a registered sender ID and a pre-approved template. This applies to the webhook path and is a provider-side requirement, not something the code can satisfy. The composer path sidesteps it because the visitor's own messaging app does the sending.
 
 ## Palette
 
