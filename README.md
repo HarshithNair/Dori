@@ -1,6 +1,6 @@
 # dori. — Kaam se kamaai tak.
 
-A frontend-only worker livelihood demo built with Next.js App Router, TypeScript, Tailwind CSS, Motion, Radix/shadcn-style components, Recharts and QRCode React.
+A warm yellow-and-gold frontend-only worker livelihood demo built with Next.js App Router, TypeScript, Tailwind CSS, Motion, Radix/shadcn-style components, Recharts and QRCode React.
 
 ## Run
 
