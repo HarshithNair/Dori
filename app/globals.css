@@ -180,3 +180,11 @@ html{scroll-behavior:smooth}
 .aadhaar-input{letter-spacing:6px;text-align:center}
 .aadhaar-state{margin:14px 0 4px;min-height:24px;display:flex;align-items:center;gap:8px}
 .profile-generated .badge.sky{margin-top:8px}
+
+/* Two stacked cards in the identity sidebar: the left column spans both rows. */
+.identity-layout>div:first-child{grid-column:1;grid-row:1 / span 2}
+.identity-layout>aside{grid-column:2}
+.aadhaar-card label{display:block;margin-top:18px}
+.aadhaar-card .aadhaar-state{margin:12px 0 16px}
+.aadhaar-card .btn{width:100%}
+.aadhaar-card .text-button{margin-top:14px}
