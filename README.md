@@ -35,7 +35,15 @@ The verify QR uses the current origin and `/verify/`. The UPI QR contains a clea
 
 ## Known demo scope
 
-Language selection persists a preference; full translation is not implemented. Voice controls show simulated transcriptions or summaries. Baseline job history and profiles are sample records. Worker portraits were provided as references. A single active project connects the judge's story; this is not a multi-job accounting system. Team shares are proposals and are not automatically paid or deducted.
+Language selection translates the interface into Hindi or Marathi. Proper nouns, demo IDs and the `dori.` wordmark stay as they are. Voice controls show simulated transcriptions or summaries. Baseline job history and profiles are sample records. Worker portraits were provided as references. A single active project connects the judge's story; this is not a multi-job accounting system. Team shares are proposals and are not automatically paid or deducted.
+
+## Language
+
+Hindi, Marathi and English are selectable from the topbar globe or during onboarding, and the choice persists in localStorage.
+
+The English source string is itself the translation key, so anything without a translation falls back to readable English rather than a raw identifier. Translations live in `lib/translations-hi.ts` and `lib/translations-mr.ts`; `lib/i18n.tsx` holds the lookup and a `fmt()` helper whose `{0}` placeholders let a translation reorder interpolated values. Components read `t` from the store as `tr`, because `t` is already used as a map parameter in several files.
+
+Select option values stay in English so state comparisons keep working while the visible label is translated. Choosing Hindi or Marathi sets `<html lang>` and `data-lang`, which switches to a Devanagari font stack and relaxes the Latin letter-spacing.
 
 ## Checks
 

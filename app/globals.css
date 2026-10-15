@@ -161,3 +161,17 @@ html{scroll-behavior:smooth}
 }
 /* The active nav highlight is drawn by the sliding pill, not the button. */
 .sidebar nav button.active{background:transparent}
+
+/* ───────────────── Devanagari typography ───────────────── */
+:root[data-lang=hi],:root[data-lang=mr]{--deva:'Noto Sans Devanagari','Kohinoor Devanagari','Devanagari Sangam MN','Nirmala UI',sans-serif}
+:root[data-lang=hi] body,:root[data-lang=mr] body{font-family:Inter,Manrope,var(--deva),-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.7}
+/* Devanagari needs vertical room and no tight tracking to stay legible. */
+:root[data-lang=hi] h1,:root[data-lang=mr] h1{letter-spacing:-.2px;line-height:1.35}
+:root[data-lang=hi] h2,:root[data-lang=mr] h2{letter-spacing:0;line-height:1.5}
+:root[data-lang=hi] h3,:root[data-lang=mr] h3{line-height:1.55}
+:root[data-lang=hi] .eyebrow,:root[data-lang=mr] .eyebrow{letter-spacing:.6px;line-height:1.6}
+:root[data-lang=hi] .logo,:root[data-lang=mr] .logo{font-family:Inter,Manrope,sans-serif}
+:root[data-lang=hi] .btn,:root[data-lang=mr] .btn{line-height:1.5;height:auto;padding-top:11px;padding-bottom:11px}
+:root[data-lang=hi] .stat-card>strong,:root[data-lang=mr] .stat-card>strong{letter-spacing:-.5px}
+:root[data-lang=hi] .sidebar nav button,:root[data-lang=mr] .sidebar nav button{line-height:1.45}
+:root[data-lang=hi] .mobile-bottom button,:root[data-lang=mr] .mobile-bottom button{line-height:1.3}
