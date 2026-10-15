@@ -47,3 +47,117 @@
 .selected{color:#715100!important}
 .intro .thread path{stroke:#FFDC4D}.intro .thread circle{fill:#FFF0B8}
 .intro.revealing .thread path{stroke:#B78103}
+
+
+/* ───────────────── Motion layer & minimal polish ───────────────── */
+:root{--ease:cubic-bezier(.22,1,.36,1);--ease-soft:cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(16px)}}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes popIn{from{opacity:0;transform:scale(.96)}}
+@keyframes growUp{from{transform:scaleY(.02)}}
+@keyframes sweep{from{transform:translateX(-130%)}to{transform:translateX(260%)}}
+@keyframes floatY{50%{transform:translateY(-10px)}}
+@keyframes floatYAlt{50%{transform:translateY(9px)}}
+@keyframes breathe{50%{opacity:.5;transform:scale(.93)}}
+@keyframes ringOut{from{opacity:.45;transform:scale(1)}to{opacity:0;transform:scale(2.8)}}
+@keyframes waveHand{15%{transform:rotate(16deg)}35%{transform:rotate(-9deg)}55%{transform:rotate(12deg)}75%{transform:rotate(-5deg)}to{transform:rotate(0)}}
+@keyframes drift{50%{transform:translateY(-8px) rotate(10deg)}}
+@keyframes drawIn{from{stroke-dashoffset:1600}}
+@keyframes overlayIn{from{opacity:0;backdrop-filter:blur(0)}}
+@keyframes sheetIn{from{opacity:0;transform:translate(-50%,-47%) scale(.97)}}
+@keyframes sheetOut{to{opacity:0;transform:translate(-50%,-50%) scale(.985)}}
+
+/* Page choreography: top-level blocks of each page rise in sequence. */
+.main-content>div>*{animation:riseIn .5s var(--ease) backwards}
+.main-content>div>*:nth-child(2){animation-delay:.05s}
+.main-content>div>*:nth-child(3){animation-delay:.1s}
+.main-content>div>*:nth-child(4){animation-delay:.15s}
+.main-content>div>*:nth-child(5){animation-delay:.2s}
+.main-content>div>*:nth-child(6){animation-delay:.25s}
+.main-content>div>*:nth-child(n+7){animation-delay:.3s}
+
+/* Inner stagger for card grids. */
+.stats-grid>*,.dashboard-grid>*,.team-grid>*,.haq-grid>*,.rights-grid>*,.forecast-grid>*,.role-grid>*,.trade-grid>*,.choice-grid>*,.terms-grid>*{animation:riseIn .52s var(--ease) backwards}
+.stats-grid>*:nth-child(2),.dashboard-grid>*:nth-child(2),.team-grid>*:nth-child(2),.haq-grid>*:nth-child(2),.rights-grid>*:nth-child(2),.forecast-grid>*:nth-child(2),.role-grid>*:nth-child(2),.trade-grid>*:nth-child(2),.choice-grid>*:nth-child(2),.terms-grid>*:nth-child(2){animation-delay:.06s}
+.stats-grid>*:nth-child(3),.dashboard-grid>*:nth-child(3),.team-grid>*:nth-child(3),.haq-grid>*:nth-child(3),.rights-grid>*:nth-child(3),.trade-grid>*:nth-child(3),.choice-grid>*:nth-child(3),.terms-grid>*:nth-child(3){animation-delay:.12s}
+.stats-grid>*:nth-child(4),.team-grid>*:nth-child(4),.trade-grid>*:nth-child(4),.choice-grid>*:nth-child(4),.terms-grid>*:nth-child(4){animation-delay:.18s}
+.stats-grid>*:nth-child(n+5),.team-grid>*:nth-child(n+5),.trade-grid>*:nth-child(n+5),.choice-grid>*:nth-child(n+5),.terms-grid>*:nth-child(n+5){animation-delay:.24s}
+
+/* Rows reveal with a light cascade. */
+.expense-row,.notification-row,.invitation-row,.area-row{animation:riseIn .45s var(--ease) backwards}
+.expense-row:nth-child(2),.notification-row:nth-child(2),.invitation-row:nth-child(2){animation-delay:.04s}
+.expense-row:nth-child(3),.notification-row:nth-child(3),.invitation-row:nth-child(3){animation-delay:.08s}
+.expense-row:nth-child(4),.notification-row:nth-child(4){animation-delay:.12s}
+.expense-row:nth-child(n+5),.notification-row:nth-child(n+5){animation-delay:.16s}
+
+/* Calmer surfaces: hairline borders carry the structure, not shadows. */
+.card{transition:border-color .28s var(--ease),box-shadow .28s var(--ease),transform .28s var(--ease)}
+.role-card{box-shadow:none;transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.role-card:hover{box-shadow:0 14px 34px #b781030a}
+.floating-card{box-shadow:0 8px 24px #302b1d0a;border-color:var(--line)}
+.modal{box-shadow:0 18px 60px #302b1d1f}
+.stat-card{transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease)}
+.stat-card:hover{border-color:#e2d6b0;box-shadow:0 10px 26px #302b1d08}
+.btn{transition:background .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease),color .22s var(--ease)}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.icon-button{transition:background .2s var(--ease),transform .2s var(--ease)}
+.icon-button:hover{transform:translateY(-1px)}
+
+/* Navigation feels responsive without shouting. */
+.sidebar nav button{transition:background .22s var(--ease),color .22s var(--ease),padding-left .22s var(--ease)}
+.sidebar nav button:hover:not(.active){padding-left:18px}
+.sidebar nav button svg{transition:transform .25s var(--ease)}
+.sidebar nav button:hover svg,.sidebar nav button.active svg{transform:scale(1.08)}
+.nav-pill{position:absolute;inset:0;border-radius:9px;background:#FFF0B8;z-index:-1}
+.sidebar nav button{position:relative;isolation:isolate}
+.sidebar-scrim{animation:fadeIn .25s var(--ease) backwards}
+.mobile-bottom button svg{transition:transform .25s var(--ease)}
+.mobile-bottom button.active svg{transform:translateY(-2px) scale(1.1)}
+
+/* Ambient life: used sparingly, only where it tells the story. */
+.hero-star{animation:drift 7s ease-in-out infinite}
+.floating-card.fc-top{animation:riseIn .6s var(--ease) backwards .35s,floatY 6.5s ease-in-out 1s infinite}
+.floating-card.fc-bottom{animation:riseIn .6s var(--ease) backwards .5s,floatYAlt 7.5s ease-in-out 1.2s infinite}
+.hero-thread path{stroke-dasharray:1600;animation:drawIn 2.2s var(--ease) backwards .15s}
+.wave{display:inline-block;transform-origin:70% 70%;animation:waveHand 2.4s var(--ease) 1s 2}
+.pulse-dot{position:relative}
+.pulse-dot:after{content:'';position:absolute;inset:0;border-radius:50%;background:inherit;animation:ringOut 2.2s var(--ease) infinite}
+.portrait-frame{animation:popIn .7s var(--ease) backwards .1s}
+
+/* Data that draws itself in. */
+.week-bar{transform-origin:bottom;animation:growUp .8s var(--ease) backwards .15s}
+.week-bars>div:nth-child(2) .week-bar{animation-delay:.21s}
+.week-bars>div:nth-child(3) .week-bar{animation-delay:.27s}
+.week-bars>div:nth-child(4) .week-bar{animation-delay:.33s}
+.week-bars>div:nth-child(5) .week-bar{animation-delay:.39s}
+.week-bars>div:nth-child(6) .week-bar{animation-delay:.45s}
+.week-bars>div:nth-child(7) .week-bar{animation-delay:.51s}
+.progress span{transition:width .8s var(--ease)}
+.step-track span{transition:background .35s var(--ease),transform .35s var(--ease)}
+.step-track .done{transform:scaleY(1.5)}
+
+/* Dialogs and transient surfaces. */
+.modal-overlay[data-state=open]{animation:overlayIn .25s var(--ease) backwards}
+.modal-overlay[data-state=closed]{animation:overlayIn .2s var(--ease) reverse both}
+.modal[data-state=open]{animation:sheetIn .3s var(--ease) backwards}
+.modal[data-state=closed]{animation:sheetOut .18s var(--ease-soft) both}
+.toast{animation:none}
+
+/* The opening. */
+.loading-bar{position:relative;width:160px;background:var(--line);overflow:hidden;animation:none}
+.loading-bar:after{content:'';position:absolute;inset:0;width:45%;background:var(--blue);animation:sweep 1.3s var(--ease-soft) infinite}
+.loading .logo{animation:breathe 2.4s var(--ease) infinite}
+.brand-reveal .logo{animation:popIn .9s var(--ease) backwards}
+.brand-reveal p{animation:riseIn .8s var(--ease) backwards .35s}
+.intro-copy h1,.intro-copy p,.intro-copy .eyebrow{will-change:transform,opacity}
+
+/* Keep every reveal visible when motion is reduced. */
+@media(prefers-reduced-motion:reduce){
+  .loading-bar{background:var(--blue)}
+  .loading-bar:after{display:none}
+  .step-track .done{transform:none}
+}
+/* The active nav highlight is drawn by the sliding pill, not the button. */
+.sidebar nav button.active{background:transparent}
